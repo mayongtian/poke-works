@@ -1,5 +1,6 @@
 package Game.staticData.AllCharacters;
 
+import java.awt.Image;
 // import image module;
 
 public class Species {
@@ -7,6 +8,7 @@ public class Species {
     // variables
     protected int id;
     protected String name;
+    protected Image sprite;
     // image icon
 
     protected int baseHp;
@@ -22,6 +24,10 @@ public class Species {
 
     public String getName(){    
         return this.name;
+    }
+
+    public Image getSprite(){
+        return this.sprite;
     }
 
     public int getBaseHp(){
@@ -48,9 +54,10 @@ public class Species {
         return this.baseSpe;
     }
 
-    public Species(int id, String name, int baseHp, int baseAtk, int baseDef, int baseSpa, int baseSpd, int baseSpe) {
+    public Species(int id, String name, Image sprite , int baseHp, int baseAtk, int baseDef, int baseSpa, int baseSpd, int baseSpe) {
         this.id = id;
         this.name = name;
+        this.sprite = sprite;
         this.baseHp = baseHp;
         this.baseAtk = baseAtk;
         this.baseDef = baseDef;
@@ -63,6 +70,6 @@ public class Species {
      * Species constructor completely for use as a super for Pokemon
      */
     public Species(Species self) {
-        this(self.getID(), self.getName(), self.getBaseHp(), self.getBaseAtk(), self.getBaseDef(), self.getBaseSpa(), self.getBaseSpd(), self.getBaseSpe());
+        this(self.getID(), self.getName(), self.getSprite(), self.getBaseHp(), self.getBaseAtk(), self.getBaseDef(), self.getBaseSpa(), self.getBaseSpd(), self.getBaseSpe());
     }
 }

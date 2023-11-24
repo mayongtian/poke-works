@@ -1,12 +1,16 @@
 package Game.staticData.AllCharacters;
 
+import java.awt.Graphics;
+import java.awt.Image;
+
+
 import Game.App;
 import Game.staticData.*;
 
 public class Pokemon extends Species {
     
     private int level;
-    
+    private boolean shiny;
     private int hpIV;
     private int atkIV;
     private int defIV;
@@ -28,6 +32,11 @@ public class Pokemon extends Species {
         HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
         Other Stats = (floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + 5) x Nature
     */
+
+    public boolean getShiny(){
+        return this.shiny;
+    }
+
     public int getHp() {
         return (int)(0.01 * (2 * this.baseHp + this.hpIV + (int)(0.25 * this.hpEV)) * this.level) + this.level + 10;
     }
@@ -52,9 +61,15 @@ public class Pokemon extends Species {
         return this.baseSpe * this.level + this.speIV + this.speEV/4;
     }
 
-    public Pokemon(Species species, int level) {
+    public void paint(Graphics g, Image sprite, int x, int y){
+        g.drawImage(sprite, x, y, null); //draw Image object on screen at coordinates (250,350)
+
+    }
+
+    public Pokemon(Species species, int level, boolean shiny) {
         super(species);
         this.level = level;
+        this.shiny = shiny;
         this.hpIV = App.random.nextInt(31);
     }
 }

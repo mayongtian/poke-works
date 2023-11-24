@@ -1,11 +1,14 @@
 package Game.staticData.AllCharacters;
 
 import java.util.*;
+
 import Game.staticData.*;
 
 public class Player extends Character{
     private Pokemon[] party;
     private ArrayList<Item> bag;
+    private int OverworldX;
+    private int OverworldY;
 
     public Pokemon getPokemon(int index){
         return this.party[index];
@@ -18,6 +21,14 @@ public class Player extends Character{
             }
         }
         return null;
+    }
+
+    public int getX(){
+        return this.OverworldX;
+    }
+
+    public int getY(){
+        return this.OverworldY;
     }
 
     public Player(String name, CharacterType type){
