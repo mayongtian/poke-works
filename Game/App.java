@@ -2,10 +2,13 @@ package Game;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 
 public class App extends JFrame {
 
@@ -23,7 +26,14 @@ public class App extends JFrame {
 
         @Override
         public void paint(Graphics g) {
-
+            try{
+                File file = new File("Drawings/sinistea.jpg"); //load image into a File object
+                Image image = ImageIO.read(file); //create Image object from File object
+                g.drawImage(image, 250, 350, rootPane); //draw Image object on screen at coordinates (250,350)
+            } catch(IOException e){
+                e.printStackTrace();
+            }
+            
         }
     }
 

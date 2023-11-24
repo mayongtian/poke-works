@@ -46,5 +46,3 @@ public enum Nature {
         this.SPE = SPE;
     }
 }
-
-
