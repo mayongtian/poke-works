@@ -37,7 +37,9 @@ public class App extends JFrame {
 
         @Override
         public void paint(Graphics g) {
+            UI ui = new UI("Overworld");
             try{
+                drawBackround(g);
                 File file = new File("Drawings/sinistea.jpg"); //load image into a File object
                 Image image = ImageIO.read(file); //create Image object from File object
                 Pokemon p = new Pokemon(new Species(854, "sinistea", image, 0, 0, 0, 0, 0, 0), 0, true);
@@ -46,6 +48,9 @@ public class App extends JFrame {
             catch(IOException e){
                 e.printStackTrace();
             }
+            ui.paint(g, ui.getGameState());
+
+
         }  
     }
     
