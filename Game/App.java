@@ -2,6 +2,7 @@ package Game;
 
 import Game.staticData.AllCharacters.Species;
 import Game.staticData.AllCharacters.Pokemon;
+import Game.staticData.AllCharacters.Player;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -25,8 +26,12 @@ public class App extends JFrame {
     }
 
     class Canvas extends JPanel {
+        UI ui;
+        Player player;
+
         public Canvas() {
             setPreferredSize(new Dimension(1280, 720));
+            this.ui = new UI("Overworld");
         }
 
         public void drawBackround(Graphics g){
@@ -37,7 +42,6 @@ public class App extends JFrame {
 
         @Override
         public void paint(Graphics g) {
-            UI ui = new UI("Overworld");
             try{
                 drawBackround(g);
                 File file = new File("Drawings/sinistea.jpg"); //load image into a File object
@@ -48,9 +52,7 @@ public class App extends JFrame {
             catch(IOException e){
                 e.printStackTrace();
             }
-            ui.paint(g, ui.getGameState());
-
-
+            this.ui.paint(g, this.ui.getGameState());
         }  
     }
     

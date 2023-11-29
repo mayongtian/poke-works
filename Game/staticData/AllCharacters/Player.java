@@ -31,6 +31,14 @@ public class Player extends Character{
         return this.OverworldY;
     }
 
+    public void setX(int x){
+        this.OverworldX = x;
+    }
+
+    public void setY(int y){
+        this.OverworldY = y;
+    }
+
     public Player(String name, CharacterType type){
         super(name, type);
     }
