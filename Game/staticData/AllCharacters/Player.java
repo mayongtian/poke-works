@@ -2,6 +2,13 @@ package Game.staticData.AllCharacters;
 
 import java.util.*;
 
+import javax.imageio.ImageIO;
+
+import java.awt.Graphics;
+import java.io.File;
+import java.awt.Image;
+import java.io.IOException;
+
 import Game.staticData.*;
 
 public class Player extends Character{
@@ -9,6 +16,7 @@ public class Player extends Character{
     private ArrayList<Item> bag;
     private int OverworldX;
     private int OverworldY;
+    private Image sprite;
 
     public Pokemon getPokemon(int index){
         return this.party[index];
@@ -23,23 +31,45 @@ public class Player extends Character{
         return null;
     }
 
-    public int getX(){
+    public int getOverworldX(){
         return this.OverworldX;
     }
 
-    public int getY(){
+    public int getOverworldY(){
         return this.OverworldY;
     }
 
-    public void setX(int x){
-        this.OverworldX = x;
+    public void moveUp(){
+        this.OverworldY-=3;
     }
 
-    public void setY(int y){
-        this.OverworldY = y;
+    public void moveDown(){
+        this.OverworldY+=3;
+    }
+
+    public void moveRight(){
+        this.OverworldX+=3;
+    }
+
+    public void moveLeft(){
+        this.OverworldX-=3;
+    }
+
+    public void paint(Graphics g){
+        g.drawImage(this.sprite, this.OverworldX, this.OverworldY, null);
     }
 
     public Player(String name, CharacterType type){
         super(name, type);
+        this.OverworldX = 515;
+        this.OverworldY = 235;
+        try{
+            File file = new File("Drawings/sinistea.jpg"); //load image into a File object
+            Image image = ImageIO.read(file); //create Image object from File object
+            this.sprite = image;
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
