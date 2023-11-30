@@ -59,6 +59,14 @@ public class Player extends Character{
         return this.movingRight;
     }
 
+    public void setOverworldX(int x){
+        this.OverworldX = x;
+    }
+
+    public void setOverworldY(int y){
+        this.OverworldY = y;
+    }
+
     public void setMovingUp(boolean toggle){
         this.movingUp = toggle;
     }
@@ -76,19 +84,19 @@ public class Player extends Character{
     }
 
     public void moveUp(){
-        this.OverworldY-=3;
+        this.OverworldY-=5;
     }
 
     public void moveDown(){
-        this.OverworldY+=3;
+        this.OverworldY+=5;
     }
 
     public void moveRight(){
-        this.OverworldX+=3;
+        this.OverworldX+=5;
     }
 
     public void moveLeft(){
-        this.OverworldX-=3;
+        this.OverworldX-=5;
     }
 
     public void paint(Graphics g){

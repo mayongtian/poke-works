@@ -53,15 +53,27 @@ public class App extends JFrame {
         public void paint(Graphics g) {
             drawBackround(g);
             if(player.getMovingUp()){
+                if(player.getOverworldY() < -125){
+                    player.setOverworldY(595);
+                }
                 player.moveUp();
             }
             if(player.getMovingLeft()){
+                if(player.getOverworldX() < -125){
+                    player.setOverworldX(1155);
+                }
                 player.moveLeft();
             }
             if(player.getMovingDown()){
+                if(player.getOverworldY() > 595){
+                    player.setOverworldY(-125);
+                }
                 player.moveDown();
             }
             if(player.getMovingRight()){
+                if(player.getOverworldX() > 1155){
+                    player.setOverworldX(-125);
+                }
                 player.moveRight();
             }
             player.paint(g);
@@ -141,7 +153,7 @@ public class App extends JFrame {
             Instant endTime = Instant.now();
             long howLong = Duration.between(startTime, endTime).toMillis();
             try {
-            Thread.sleep(33l - howLong);
+            Thread.sleep(17l - howLong);
             } catch(InterruptedException e) {
             System.out.println("thread was interrupted, but who cares?");
             } catch(IllegalArgumentException e) {
