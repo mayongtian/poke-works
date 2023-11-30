@@ -1,5 +1,6 @@
 package Game.staticData.AllCharacters;
 
+import Game.staticData.Map;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -83,20 +84,20 @@ public class Player extends Character{
         this.movingRight = toggle;
     }
 
-    public void moveUp(){
-        this.OverworldY-=5;
+    public void moveUp(Map m){
+        m.y+=5;
     }
 
-    public void moveDown(){
-        this.OverworldY+=5;
+    public void moveDown(Map m){
+        m.y-=5;
     }
 
-    public void moveRight(){
-        this.OverworldX+=5;
+    public void moveRight(Map m){
+        m.x-=5;
     }
 
-    public void moveLeft(){
-        this.OverworldX-=5;
+    public void moveLeft(Map m){
+        m.x+=5;
     }
 
     public void paint(Graphics g){

@@ -4,6 +4,7 @@ package Game;
 //import Game.staticData.AllCharacters.Pokemon;
 import Game.staticData.AllCharacters.CharacterType;
 import Game.staticData.AllCharacters.Player;
+import Game.staticData.Map;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -11,11 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.util.Random;
-//import java.io.File;
-//import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
-//import java.awt.Image;
-//import javax.imageio.ImageIO;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.time.Duration;
 import java.awt.event.MouseEvent;
@@ -33,8 +34,9 @@ public class App extends JFrame {
     }
 
     class Canvas extends JPanel implements KeyListener, MouseListener {
-        UI ui;
-        Player player;
+        public UI ui;
+        public Player player;
+        public Map map;
 
         public Canvas() {
             setPreferredSize(new Dimension(1280, 720));
@@ -42,39 +44,50 @@ public class App extends JFrame {
             this.addKeyListener(this);
             this.ui = new UI("Overworld");
             this.player = new Player("name", CharacterType.PLAYER);
-        }
-
-        public void drawBackround(Graphics g){
-            g.setColor(Color.GREEN);
-            g.fillRect(0,0,1280,720);
+            try{
+                File file = new File("Drawings/IMG_3046.jpg"); //load image into a File object
+                Image image = ImageIO.read(file); //create Image object from File object
+                this.map = new Map(image, 0, 0);
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+            
+            
         }
 
         @Override
         public void paint(Graphics g) {
-            drawBackround(g);
+            map.paint(g);
             if(player.getMovingUp()){
-                if(player.getOverworldY() < -125){
+                /* if(player.getOverworldY() < -125){
                     player.setOverworldY(595);
-                }
-                player.moveUp();
+                } */
+                player.moveUp(map);
             }
             if(player.getMovingLeft()){
+                /*
                 if(player.getOverworldX() < -125){
                     player.setOverworldX(1155);
                 }
-                player.moveLeft();
+                */
+                player.moveLeft(map);
             }
             if(player.getMovingDown()){
+                /*
                 if(player.getOverworldY() > 595){
                     player.setOverworldY(-125);
                 }
-                player.moveDown();
+                */
+                player.moveDown(map);
             }
             if(player.getMovingRight()){
+                /*
                 if(player.getOverworldX() > 1155){
                     player.setOverworldX(-125);
                 }
-                player.moveRight();
+                */
+                player.moveRight(map);
             }
             player.paint(g);
             this.ui.paint(g, this.ui.getGameState());
