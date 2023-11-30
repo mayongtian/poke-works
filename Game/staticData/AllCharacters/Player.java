@@ -17,6 +17,10 @@ public class Player extends Character{
     private int OverworldX;
     private int OverworldY;
     private Image sprite;
+    private boolean movingLeft;
+    private boolean movingRight;
+    private boolean movingUp;
+    private boolean movingDown;
 
     public Pokemon getPokemon(int index){
         return this.party[index];
@@ -37,6 +41,38 @@ public class Player extends Character{
 
     public int getOverworldY(){
         return this.OverworldY;
+    }
+
+    public boolean getMovingUp(){
+        return this.movingUp;
+    }
+
+    public boolean getMovingDown(){
+        return this.movingDown;
+    }
+
+    public boolean getMovingLeft(){
+        return this.movingLeft;
+    }
+
+    public boolean getMovingRight(){
+        return this.movingRight;
+    }
+
+    public void setMovingUp(boolean toggle){
+        this.movingUp = toggle;
+    }
+
+    public void setMovingDown(boolean toggle){
+        this.movingDown = toggle;
+    }
+
+    public void setMovingLeft(boolean toggle){
+        this.movingLeft = toggle;
+    }
+
+    public void setMovingRight(boolean toggle){
+        this.movingRight = toggle;
     }
 
     public void moveUp(){

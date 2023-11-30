@@ -6,9 +6,9 @@ import Game.staticData.AllCharacters.CharacterType;
 import Game.staticData.AllCharacters.Player;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.plaf.ListUI;
 
 import java.util.Random;
 //import java.io.File;
@@ -22,9 +22,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 
 public class App extends JFrame {
 
@@ -35,15 +32,14 @@ public class App extends JFrame {
         window.run();
     }
 
-    class Canvas extends JPanel implements ActionListener, MouseListener {
+    class Canvas extends JPanel implements KeyListener, MouseListener {
         UI ui;
         Player player;
 
         public Canvas() {
             setPreferredSize(new Dimension(1280, 720));
             this.addMouseListener(this);
-            Listener l = new Listener();
-            this.addKeyListener(l);
+            this.addKeyListener(this);
             this.ui = new UI("Overworld");
             this.player = new Player("name", CharacterType.PLAYER);
         }
@@ -56,6 +52,18 @@ public class App extends JFrame {
         @Override
         public void paint(Graphics g) {
             drawBackround(g);
+            if(player.getMovingUp()){
+                player.moveUp();
+            }
+            if(player.getMovingLeft()){
+                player.moveLeft();
+            }
+            if(player.getMovingDown()){
+                player.moveDown();
+            }
+            if(player.getMovingRight()){
+                player.moveRight();
+            }
             player.paint(g);
             this.ui.paint(g, this.ui.getGameState());
         }
@@ -76,32 +84,40 @@ public class App extends JFrame {
         @Override
         public void mouseExited(MouseEvent e) {}
 
+        @Override
+        public void keyPressed(KeyEvent e){
+            if(e.getKeyCode() == KeyEvent.VK_W){
+                player.setMovingUp(true);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_A){
+                player.setMovingLeft(true);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_S){
+                player.setMovingDown(true);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_D){
+                player.setMovingRight(true);
+            }
+        }
 
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void keyTyped(KeyEvent e){
 
         }
 
-        private class Listener extends KeyAdapter {
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-        
-                int key = e.getKeyCode() ;
-                System.out.println(key);
-        
-                if (key == KeyEvent.VK_LEFT){
-
-                }
-        
-                if (key == KeyEvent.VK_RIGHT) {
-                }
-        
-                if (key == KeyEvent.VK_UP) {
-                }
-        
-                if (key == KeyEvent.VK_DOWN) {
-                }
+        @Override
+        public void keyReleased(KeyEvent e){
+            if(e.getKeyCode() == KeyEvent.VK_W){
+                player.setMovingUp(false);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_A){
+                player.setMovingLeft(false);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_S){
+                player.setMovingDown(false);
+            }
+            if(e.getKeyCode() == KeyEvent.VK_D){
+                player.setMovingRight(false);
             }
         }
     }
@@ -114,6 +130,8 @@ public class App extends JFrame {
         
         this.pack();
         this.setVisible(true);
+        this.getContentPane().setFocusable(true);
+        this.getContentPane().requestFocus();
     }
 
     public void run() {
