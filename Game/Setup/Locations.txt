@@ -1,2 +1,2 @@
-1;Chumkey;C:\\Users\\miked\\poke-works\\Drawings\\ash_valley_map.png
+1;Chumkey;Drawings\ash_valley_diagonal_floor_and_path.png
 2;testTown;Drawings\IMG_3046.jpg

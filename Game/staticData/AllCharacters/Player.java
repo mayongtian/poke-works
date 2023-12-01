@@ -98,7 +98,7 @@ public class Player extends Character{
     }
 
     public void moveDown(Map m){
-        if(m.y> -1 * (m.getCurrentLocation().map.getHeight(null) - 720) && this.OverworldY == 360){
+        if(this.OverworldY == 360 - this.sprite.getHeight(null)/2 && m.y > -1* (m.getCurrentLocation().map.getHeight(null) - 720)){
             m.y-=5;
         }
         else if(this.OverworldY < 470 || this.OverworldY < this.sprite.getHeight(null)/2){
@@ -108,7 +108,7 @@ public class Player extends Character{
     }
 
     public void moveRight(Map m){
-        if(m.x> -1 * (m.getCurrentLocation().map.getWidth(null) - 1280) && this.OverworldX == 640){
+        if(this.OverworldX == 640 - this.sprite.getWidth(null)/2 && m.x > -1* (m.getCurrentLocation().map.getWidth(null) - 1280)){
             m.x-=5;
         } 
         else if(this.OverworldX < 1030 || this.OverworldX < 640 - this.sprite.getWidth(null)/2){
