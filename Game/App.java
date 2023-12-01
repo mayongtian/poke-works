@@ -7,22 +7,21 @@ import Game.staticData.AllCharacters.Player;
 import Game.staticData.Map;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.util.Random;
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
 import java.time.Instant;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-import java.awt.Color;
+//import java.awt.Image;
+//import javax.imageio.ImageIO;
+//import java.awt.Color;
 import java.time.Duration;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 
 public class App extends JFrame {
 
@@ -37,74 +36,64 @@ public class App extends JFrame {
         public UI ui;
         public Player player;
         public Map map;
+        public GameState gameState;
+        public double mouseX;
+        public double mouseY;
 
         public Canvas() {
             setPreferredSize(new Dimension(1280, 720));
             this.addMouseListener(this);
             this.addKeyListener(this);
-            this.ui = new UI("Overworld");
+            this.ui = new UI();
+            
+            this.gameState = GameState.OVERWORLD;
             this.player = new Player("name", CharacterType.PLAYER);
-            try{
-                File file = new File("Drawings/IMG_3046.jpg"); //load image into a File object
-                Image image = ImageIO.read(file); //create Image object from File object
-                this.map = new Map(image, 0, 0);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
+            this.map = new Map(0, 0);
             
             
         }
 
         @Override
         public void paint(Graphics g) {
-            map.paint(g);
+            this.map.paint(g);
             if(player.getMovingUp()){
-                /* if(player.getOverworldY() < -125){
-                    player.setOverworldY(595);
-                } */
                 player.moveUp(map);
             }
             if(player.getMovingLeft()){
-                /*
-                if(player.getOverworldX() < -125){
-                    player.setOverworldX(1155);
-                }
-                */
                 player.moveLeft(map);
             }
             if(player.getMovingDown()){
-                /*
-                if(player.getOverworldY() > 595){
-                    player.setOverworldY(-125);
-                }
-                */
                 player.moveDown(map);
             }
             if(player.getMovingRight()){
-                /*
-                if(player.getOverworldX() > 1155){
-                    player.setOverworldX(-125);
-                }
-                */
                 player.moveRight(map);
             }
             player.paint(g);
-            this.ui.paint(g, this.ui.getGameState());
+            this.ui.paint(g, this.gameState);
+            this.mouseX = this.getMousePosition().getX();
+            this.mouseY = this.getMousePosition().getY();
         }
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if(e.getX() <= 1270 && e.getX() >= 1170 && e.getY() <= 710 && e.getY() >= 690){
+            }
+               
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+            
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+            
+        }
 
         @Override
         public void mouseExited(MouseEvent e) {}
@@ -123,11 +112,13 @@ public class App extends JFrame {
             if(e.getKeyCode() == KeyEvent.VK_D){
                 player.setMovingRight(true);
             }
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE && this.gameState == GameState.MENU){
+                //this.gameState = GameState.OVERWORLD;
+            }
         }
 
         @Override
         public void keyTyped(KeyEvent e){
-
         }
 
         @Override
@@ -143,7 +134,7 @@ public class App extends JFrame {
             }
             if(e.getKeyCode() == KeyEvent.VK_D){
                 player.setMovingRight(false);
-            }
+            } 
         }
     }
     
@@ -152,7 +143,6 @@ public class App extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Canvas canvas = new Canvas();
         this.setContentPane(canvas);
-        
         this.pack();
         this.setVisible(true);
         this.getContentPane().setFocusable(true);

@@ -60,6 +60,10 @@ public class Player extends Character{
         return this.movingRight;
     }
 
+    public Image getSprite(){
+        return this.sprite;
+    }
+
     public void setOverworldX(int x){
         this.OverworldX = x;
     }
@@ -85,19 +89,40 @@ public class Player extends Character{
     }
 
     public void moveUp(Map m){
-        m.y+=5;
+        if(m.y<0 && this.OverworldY == 360 - this.sprite.getHeight(null)/2){
+            m.y+=5;
+        }
+        else if(this.OverworldY > 0 || this.OverworldY > this.sprite.getHeight(null)/2){
+            this.OverworldY-=5;
+        }
     }
 
     public void moveDown(Map m){
-        m.y-=5;
+        if(m.y> -1 * (m.getCurrentLocation().map.getHeight(null) - 720) && this.OverworldY == 360){
+            m.y-=5;
+        }
+        else if(this.OverworldY < 470 || this.OverworldY < this.sprite.getHeight(null)/2){
+            this.OverworldY+=5;
+        }
+        
     }
 
     public void moveRight(Map m){
-        m.x-=5;
+        if(m.x> -1 * (m.getCurrentLocation().map.getWidth(null) - 1280) && this.OverworldX == 640){
+            m.x-=5;
+        } 
+        else if(this.OverworldX < 1030 || this.OverworldX < 640 - this.sprite.getWidth(null)/2){
+            this.OverworldX+=5;
+        }
     }
 
     public void moveLeft(Map m){
-        m.x+=5;
+        if(m.x<0 && this.OverworldX == 640 - this.sprite.getWidth(null)/2){
+            m.x+=5;
+        }
+        else if(this.OverworldX > 0 || this.OverworldX > 640 - this.sprite.getWidth(null)/2){
+            this.OverworldX-=5;
+        }
     }
 
     public void paint(Graphics g){
@@ -106,15 +131,18 @@ public class Player extends Character{
 
     public Player(String name, CharacterType type){
         super(name, type);
-        this.OverworldX = 515;
-        this.OverworldY = 235;
         try{
             File file = new File("Drawings/sinistea.jpg"); //load image into a File object
             Image image = ImageIO.read(file); //create Image object from File object
             this.sprite = image;
+            System.out.println(image.getWidth(null));
+            this.OverworldX = 640 - image.getWidth(null)/2;
+            this.OverworldY = 360 - image.getHeight(null)/2;
         }
         catch(IOException e){
             e.printStackTrace();
         }
+        
+        
     }
 }

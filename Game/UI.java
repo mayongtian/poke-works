@@ -5,23 +5,24 @@ import java.awt.Graphics;
 //import java.awt.Color;
 
 public class UI {
-    private String gameState;
+    public boolean optionsHovered;
 
-
-    public void setGameState(String gameState){
-        this.gameState = gameState;
+    public void paint(Graphics g, GameState gameState){
+        if(gameState == GameState.OVERWORLD){
+            if(optionsHovered){
+            g.setColor(Color.GRAY);
+        }
+        else{
+            g.setColor(Color.DARK_GRAY);
+        }
+        g.fillRect(1170, 690, 100, 20);
+        g.setColor(Color.BLACK);
+        g.drawRect(1170, 690, 100, 20);
+        g.setColor(Color.WHITE);
+        g.drawString("Options", 1197, 705);
+        } 
     }
 
-    public String getGameState(){
-        return this.gameState;
-    }
-
-    public void paint(Graphics g, String gameState){
-        g.setColor(Color.BLUE);
-        g.drawRect(0,0,150,150);
-    }
-
-    public UI(String gameState){
-        this.gameState = gameState;
+    public UI(){
     }
 }
