@@ -41,7 +41,7 @@ public class Map {
         this.y = y;
         this.locations = new ArrayList<Location>(); 
         try{
-            File file = new File("Game\\Setup\\Locations.txt");
+            File file = new File("Game/Setup/Locations.txt");
             Scanner reader = new Scanner(file);
             String object;
             while(reader.hasNextLine()){
@@ -54,7 +54,7 @@ public class Map {
                 locations.add(new Location(id, name, map));
             }
             reader.close();
-            file = new File("Game\\Setup\\Gates.txt");
+            file = new File("Game/Setup/Gates.txt");
             reader = new Scanner(file);
             while(reader.hasNextLine()){
                 object = reader.nextLine();
