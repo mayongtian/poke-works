@@ -50,11 +50,7 @@ public class App extends JFrame {
             
             this.gameState = GameState.OVERWORLD;
             this.player = new Player("name", CharacterType.PLAYER, 0, 0, 0, 0);
-            this.map = new WorldMap(0, 0);
-            Building b = new Building(640, 360, 0, 0,0,0,"Drawings\\ash_valley_diagonal_lab.png");
-            map.getCurrentLocation().addBuilding(b);
-            
-            
+            this.map = new WorldMap(0, 0);           
         }
 
         @Override

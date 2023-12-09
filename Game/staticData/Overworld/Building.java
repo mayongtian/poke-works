@@ -1,6 +1,4 @@
 package Game.StaticData.Overworld;
-import java.awt.Graphics;
-import java.awt.Image;
 
 public class Building extends OverworldObject{
     private int spriteWidth;

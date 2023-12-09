@@ -132,7 +132,7 @@ public class Player extends Character{
     public Player(String name, CharacterType type, int OverworldX, int OverworldY, int width, int height){
         super(name, type, OverworldX, OverworldY, width, height);
         try{
-            File file = new File("Drawings/sinistea.jpg"); //load image into a File object
+            File file = new File("Drawings\\player_sprite_basic (1).png"); //load image into a File object
             Image image = ImageIO.read(file); //create Image object from File object
             this.sprite = image;
             System.out.println(image.getWidth(null));

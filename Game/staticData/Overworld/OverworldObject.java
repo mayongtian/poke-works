@@ -36,9 +36,8 @@ public abstract class OverworldObject {
         this.y = y;
     }
 
-    public void paint(Graphics g){
-        g.drawImage(this.sprite, 0,0, null);
-        System.out.println("ITS WORKING");
+    public void paint(Graphics g, int x, int y){
+        g.drawImage(this.sprite, x,y, null);
     }
 
     public OverworldObject(int x, int y, int width, int height, String spritePath) {

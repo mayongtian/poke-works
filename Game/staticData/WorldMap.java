@@ -34,7 +34,7 @@ public class WorldMap {
     public void paint(Graphics g){
         g.drawImage(this.currentLocation.getMapImage(), this.x, this.y, null);
         for(Building b: this.currentLocation.getBuildings()){
-            g.drawImage(b.getSprite(), this.x, this.y, null);
+            b.paint(g, this.x, this.y);
         }
         
     }
@@ -73,5 +73,8 @@ public class WorldMap {
         catch(IOException e){
             e.printStackTrace();
         }
+        
+        Building b = new Building(640, 360, 0, 0,0,0,"Drawings\\ash_valley_diagonal_lab.png");
+        getCurrentLocation().addBuilding(b);
     }
 }
