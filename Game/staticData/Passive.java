@@ -1,4 +1,4 @@
-package Game.staticData;
+package Game.StaticData;
 
 public interface Passive {
     public default void passive() {}

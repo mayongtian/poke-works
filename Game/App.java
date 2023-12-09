@@ -1,10 +1,11 @@
 package Game;
 
-//import Game.staticData.AllCharacters.Species;
-//import Game.staticData.AllCharacters.Pokemon;
-import Game.staticData.AllCharacters.CharacterType;
-import Game.staticData.AllCharacters.Player;
-import Game.staticData.Map;
+//import Game.StaticData.AllCharacters.Species;
+//import Game.StaticData.AllCharacters.Pokemon;
+import Game.StaticData.AllCharacters.CharacterType;
+import Game.StaticData.AllCharacters.Player;
+import Game.StaticData.Overworld.Building;
+import Game.StaticData.WorldMap;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
+
 public class App extends JFrame {
 
     public static final Random random = new Random();
@@ -35,7 +37,7 @@ public class App extends JFrame {
     class Canvas extends JPanel implements KeyListener, MouseListener {
         public UI ui;
         public Player player;
-        public Map map;
+        public WorldMap map;
         public GameState gameState;
         public double mouseX;
         public double mouseY;
@@ -47,8 +49,10 @@ public class App extends JFrame {
             this.ui = new UI();
             
             this.gameState = GameState.OVERWORLD;
-            this.player = new Player("name", CharacterType.PLAYER);
-            this.map = new Map(0, 0);
+            this.player = new Player("name", CharacterType.PLAYER, 0, 0, 0, 0);
+            this.map = new WorldMap(0, 0);
+            Building b = new Building(640, 360, 0, 0,0,0,"Drawings\\ash_valley_diagonal_lab.png");
+            map.getCurrentLocation().addBuilding(b);
             
             
         }
@@ -68,8 +72,9 @@ public class App extends JFrame {
             if(player.getMovingRight()){
                 player.moveRight(map);
             }
+
             player.paint(g);
-            this.ui.paint(g, this.gameState);
+            //this.ui.paint(g, this.gameState);
             this.mouseX = this.getMousePosition().getX();
             this.mouseY = this.getMousePosition().getY();
         }

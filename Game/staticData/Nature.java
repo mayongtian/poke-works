@@ -1,4 +1,4 @@
-package Game.staticData;
+package Game.StaticData;
 
 public enum Nature {
     HARDY(1, 1, 1, 1, 1), 

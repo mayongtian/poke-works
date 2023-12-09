@@ -1,4 +1,4 @@
-package Game.staticData.AllCharacters;
+package Game.StaticData.AllCharacters;
 
 import java.awt.Image;
 // import image module;

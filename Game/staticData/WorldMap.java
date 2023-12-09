@@ -1,19 +1,18 @@
-package Game.staticData;
-import Game.Location;
+package Game.StaticData;
+
+import Game.StaticData.Overworld.Location;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
+import Game.StaticData.Overworld.Building;
 //import java.io.FileReader;
 import java.util.Scanner;
-import Game.Gate;
+import Game.StaticData.Overworld.Gate;
 
-
-
-
-public class Map {
+public class WorldMap {
     private ArrayList<Location> locations;
     private Location currentLocation;
     //private Image map;
@@ -33,10 +32,14 @@ public class Map {
     }
 
     public void paint(Graphics g){
-        g.drawImage(this.currentLocation.map, this.x, this.y, null);
+        g.drawImage(this.currentLocation.getMapImage(), this.x, this.y, null);
+        for(Building b: this.currentLocation.getBuildings()){
+            g.drawImage(b.getSprite(), this.x, this.y, null);
+        }
+        
     }
 
-    public Map(int x, int y){
+    public WorldMap(int x, int y){
         this.x = x;
         this.y = y;
         this.locations = new ArrayList<Location>(); 
@@ -65,11 +68,10 @@ public class Map {
             }
             reader.close();
             this.setCurrentLocation(locations.get(0));
-            System.out.println(this.getCurrentLocation().map.getWidth(null));
+            System.out.println(this.getCurrentLocation().getMapImage().getWidth(null));
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        
     }
 }

@@ -1,6 +1,5 @@
-package Game.staticData.AllCharacters;
-
-import Game.staticData.Map;
+package Game.StaticData.AllCharacters;
+import Game.StaticData.WorldMap;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -10,7 +9,7 @@ import java.io.File;
 import java.awt.Image;
 import java.io.IOException;
 
-import Game.staticData.*;
+import Game.StaticData.*;
 
 public class Player extends Character{
     private Pokemon[] party;
@@ -88,7 +87,7 @@ public class Player extends Character{
         this.movingRight = toggle;
     }
 
-    public void moveUp(Map m){
+    public void moveUp(WorldMap m){
         if(m.y<0 && this.OverworldY == 360 - this.sprite.getHeight(null)/2){
             m.y+=5;
         }
@@ -97,18 +96,17 @@ public class Player extends Character{
         }
     }
 
-    public void moveDown(Map m){
-        if(this.OverworldY == 360 - this.sprite.getHeight(null)/2 && m.y > -1* (m.getCurrentLocation().map.getHeight(null) - 720)){
+    public void moveDown(WorldMap m){
+        if(this.OverworldY == 360 - this.sprite.getHeight(null)/2 && m.y > -1* (m.getCurrentLocation().getMapImage().getHeight(null) - 720)){
             m.y-=5;
         }
         else if(this.OverworldY < 470 || this.OverworldY < this.sprite.getHeight(null)/2){
             this.OverworldY+=5;
         }
-        
     }
 
-    public void moveRight(Map m){
-        if(this.OverworldX == 640 - this.sprite.getWidth(null)/2 && m.x > -1* (m.getCurrentLocation().map.getWidth(null) - 1280)){
+    public void moveRight(WorldMap m){
+        if(this.OverworldX == 640 - this.sprite.getWidth(null)/2 && m.x > -1* (m.getCurrentLocation().getMapImage().getWidth(null) - 1280)){
             m.x-=5;
         } 
         else if(this.OverworldX < 1030 || this.OverworldX < 640 - this.sprite.getWidth(null)/2){
@@ -116,7 +114,7 @@ public class Player extends Character{
         }
     }
 
-    public void moveLeft(Map m){
+    public void moveLeft(WorldMap m){
         if(m.x<0 && this.OverworldX == 640 - this.sprite.getWidth(null)/2){
             m.x+=5;
         }
@@ -129,8 +127,10 @@ public class Player extends Character{
         g.drawImage(this.sprite, this.OverworldX, this.OverworldY, null);
     }
 
-    public Player(String name, CharacterType type){
-        super(name, type);
+
+
+    public Player(String name, CharacterType type, int OverworldX, int OverworldY, int width, int height){
+        super(name, type, OverworldX, OverworldY, width, height);
         try{
             File file = new File("Drawings/sinistea.jpg"); //load image into a File object
             Image image = ImageIO.read(file); //create Image object from File object
@@ -138,6 +138,9 @@ public class Player extends Character{
             System.out.println(image.getWidth(null));
             this.OverworldX = 640 - image.getWidth(null)/2;
             this.OverworldY = 360 - image.getHeight(null)/2;
+            this.setWidth(image.getWidth(null));
+            this.setHeight(image.getHeight(null));
+            
         }
         catch(IOException e){
             e.printStackTrace();

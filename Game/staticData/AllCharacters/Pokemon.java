@@ -1,11 +1,11 @@
-package Game.staticData.AllCharacters;
+package Game.StaticData.AllCharacters;
 
 import java.awt.Graphics;
 import java.awt.Image;
 
 
 import Game.App;
-import Game.staticData.*;
+import Game.StaticData.*;
 
 public class Pokemon extends Species {
     

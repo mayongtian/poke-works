@@ -1,4 +1,4 @@
-package Game.staticData;
+package Game.StaticData;
 
 public class Item {
     private String name;
