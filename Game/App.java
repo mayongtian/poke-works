@@ -1,11 +1,10 @@
 package Game;
 
-//import Game.StaticData.AllCharacters.Species;
-//import Game.StaticData.AllCharacters.Pokemon;
-import Game.StaticData.AllCharacters.CharacterType;
-import Game.StaticData.AllCharacters.Player;
 import Game.StaticData.Overworld.Building;
 import Game.StaticData.WorldMap;
+import Game.StaticData.Characters.CharacterType;
+import Game.StaticData.Characters.Player;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -49,24 +48,24 @@ public class App extends JFrame {
             this.ui = new UI();
             
             this.gameState = GameState.OVERWORLD;
-            this.player = new Player("name", CharacterType.PLAYER, 0, 0, 0, 0);
-            this.map = new WorldMap(0, 0);           
+            this.player = new Player("name", CharacterType.PLAYER, 0, 0, 0, 0, "Drawings\\player\\player_sprite_basic (1).png");
+            this.map = new WorldMap();
         }
 
         @Override
         public void paint(Graphics g) {
             this.map.paint(g);
             if(player.getMovingUp()){
-                player.moveUp(map);
+                player.moveUp(map.getCurrentLocation());
             }
             if(player.getMovingLeft()){
-                player.moveLeft(map);
+                player.moveLeft(map.getCurrentLocation());
             }
             if(player.getMovingDown()){
-                player.moveDown(map);
+                player.moveDown(map.getCurrentLocation());
             }
             if(player.getMovingRight()){
-                player.moveRight(map);
+                player.moveRight(map.getCurrentLocation());
             }
 
             player.paint(g);
@@ -83,18 +82,13 @@ public class App extends JFrame {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-            
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-            
-        }
+        public void mouseEntered(MouseEvent e) {}
 
         @Override
         public void mouseExited(MouseEvent e) {}

@@ -1,6 +1,8 @@
 package Game.StaticData;
 
 import Game.StaticData.Overworld.Location;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
@@ -16,8 +18,6 @@ public class WorldMap {
     private ArrayList<Location> locations;
     private Location currentLocation;
     //private Image map;
-    public int x;
-    public int y;
 
     public ArrayList<Location> getLocations(){
         return this.locations;
@@ -32,19 +32,16 @@ public class WorldMap {
     }
 
     public void paint(Graphics g){
-        g.drawImage(this.currentLocation.getMapImage(), this.x, this.y, null);
-        for(Building b: this.currentLocation.getBuildings()){
-            b.paint(g, this.x, this.y);
-        }
-        
+        g.setColor(Color.PINK);
+        g.fillRect(0, 0, 1280, 720);
+        getCurrentLocation().paint(g);
     }
 
-    public WorldMap(int x, int y){
-        this.x = x;
-        this.y = y;
+    public WorldMap(){
         this.locations = new ArrayList<Location>(); 
         try{
-            File file = new File("Game/Setup/Locations.txt");
+            // setting all the gates from a gates.txt setup file in Setup
+            File file = new File("Game\\Setup\\Locations.txt");
             Scanner reader = new Scanner(file);
             String object;
             while(reader.hasNextLine()){
@@ -57,7 +54,8 @@ public class WorldMap {
                 locations.add(new Location(id, name, map));
             }
             reader.close();
-            file = new File("Game/Setup/Gates.txt");
+            // setting all the gates from a gates.txt setup file in Setup
+            file = new File("Game\\Setup\\Gates.txt");
             reader = new Scanner(file);
             while(reader.hasNextLine()){
                 object = reader.nextLine();
@@ -67,14 +65,16 @@ public class WorldMap {
                 gates.add(new Gate(Integer.parseInt(objectData[1]), Integer.parseInt(objectData[2]), Integer.parseInt(objectData[3]), Integer.parseInt(objectData[4]), Integer.parseInt(objectData[5]), Integer.parseInt(objectData[6]), Integer.parseInt(objectData[7])));
             }
             reader.close();
+
             this.setCurrentLocation(locations.get(0));
-            System.out.println(this.getCurrentLocation().getMapImage().getWidth(null));
+            System.out.println(this.getCurrentLocation().getX());
+            System.out.println(locations.size());
         }
         catch(IOException e){
             e.printStackTrace();
         }
-        
-        Building b = new Building(640, 360, 0, 0,0,0,"Drawings\\ash_valley_diagonal_lab.png");
+
+        Building b = new Building(this.currentLocation.getX() + 1475, this.currentLocation.getY() + 456, 379, 175, 379, 435,"Drawings\\ash_valley_flat_lab_cropped.png");
         getCurrentLocation().addBuilding(b);
     }
 }

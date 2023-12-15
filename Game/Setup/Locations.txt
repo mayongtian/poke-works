@@ -1,2 +1,2 @@
-1;Chumkey;Drawings/ash_valley_diagonal_floor_and_path.png
-2;testTown;Drawings/IMG_3046.jpg
+1;Chumkey;Drawings\ash_valley_flat_floor_and_path.png
+2;testTown;Drawings\IMG_3046.jpg

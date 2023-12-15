@@ -2,11 +2,7 @@ package Game.StaticData.Overworld;
 
 
 import Game.StaticData.WorldMap;
-import Game.StaticData.AllCharacters.*;
-
-
-
-
+import Game.StaticData.Characters.*;
 
 public class Gate {
     private int x;

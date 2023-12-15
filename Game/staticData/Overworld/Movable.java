@@ -1,7 +1,5 @@
-package Game;
+package Game.StaticData.Overworld;
 import Game.StaticData.WorldMap;
-import Game.StaticData.AllCharacters.Collidable;
-import Game.StaticData.Overworld.OverworldObject;
 
 public interface Movable<T extends OverworldObject>{
     
@@ -13,6 +11,6 @@ public interface Movable<T extends OverworldObject>{
 
     public void moveDown(WorldMap m);
     
-    public boolean inHitBox(Collidable m);
+    public boolean inHitBox(OverworldObject m);
 
 }

@@ -7,11 +7,11 @@ import java.awt.Image;
 import java.awt.Graphics;
 
 public abstract class OverworldObject {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private Image sprite;
+    protected int x;
+    protected int y;
+    protected int width;
+    protected int height;
+    protected Image sprite;
 
     public int getX() {
         return this.x;
@@ -36,8 +36,8 @@ public abstract class OverworldObject {
         this.y = y;
     }
 
-    public void paint(Graphics g, int x, int y){
-        g.drawImage(this.sprite, x,y, null);
+    public void paint(Graphics g, int relativeX, int relativeY) {
+        g.drawImage(this.sprite, relativeX + x, relativeY + y, null);
     }
 
     public OverworldObject(int x, int y, int width, int height, String spritePath) {

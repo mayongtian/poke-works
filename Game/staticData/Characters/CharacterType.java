@@ -1,4 +1,4 @@
-package Game.StaticData.AllCharacters;
+package Game.StaticData.Characters;
 
 public enum CharacterType {
     PLAYER,
