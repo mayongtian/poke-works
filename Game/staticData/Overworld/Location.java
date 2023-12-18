@@ -54,6 +54,14 @@ public class Location {
         }
     }
 
+    @Deprecated
+    public void paintTest(Graphics g){
+        g.drawImage(localMap, x, y, null);
+        for(Building b: this.buildings){
+            b.paintTest(g,this.x, this.y);
+        }
+    }
+
     public Location(int id, String name, Image localMap){ 
         this.localMap = localMap;
         this.name = name;

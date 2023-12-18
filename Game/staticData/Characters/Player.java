@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -24,6 +25,10 @@ public class Player extends Character{
     private final int speed = 5;
     public static final int BUFFER = 30;
 
+    /**
+     * gets the nth pokemon in the party
+     * @param index the 
+     */
     public Pokemon getPokemon(int index){
         return this.party[index];
     }
@@ -99,7 +104,7 @@ public class Player extends Character{
 
     public void moveUp(Location location){
         for (Building b : location.getBuildings()) {
-            if(this.getOverworldX() + this.getSprite().getWidth(null) >= b.getX() + location.getX() && this.OverworldY >= b.getY() + location.getY() && this.OverworldY <= b.getY() + b.getHeight()){
+            if(this.getOverworldX() + this.getSprite().getWidth(null) >= b.getX() + location.getX() && this.OverworldY + this.height - Player.BUFFER >= b.getY() + location.getY()){
                 return;
             }
         }
@@ -135,6 +140,12 @@ public class Player extends Character{
 
     public void paint(Graphics g){
         g.drawImage(this.sprite, this.OverworldX, this.OverworldY, null);
+    }
+
+    @Deprecated
+    public void paintTest(Graphics g){
+        g.setColor(Color.BLUE);
+        g.fillRect(this.OverworldX, this.OverworldY, width, height);
     }
 
     public Player(String name, CharacterType type, int OverworldX, int OverworldY, int width, int height, String spritePath){

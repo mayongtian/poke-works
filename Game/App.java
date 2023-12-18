@@ -5,8 +5,11 @@ import Game.StaticData.WorldMap;
 import Game.StaticData.Characters.CharacterType;
 import Game.StaticData.Characters.Player;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
+import javax.management.DescriptorKey;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Random;
@@ -54,6 +57,14 @@ public class App extends JFrame {
 
         @Override
         public void paint(Graphics g) {
+            paintTest(g);
+        }
+
+        /**
+         * our old drawing function before we decided rectangles were better
+         */
+        @Deprecated
+        public void paintGame(Graphics g){
             this.map.paint(g);
             if(player.getMovingUp()){
                 player.moveUp(map.getCurrentLocation());
@@ -67,11 +78,32 @@ public class App extends JFrame {
             if(player.getMovingRight()){
                 player.moveRight(map.getCurrentLocation());
             }
-
             player.paint(g);
             //this.ui.paint(g, this.gameState);
             this.mouseX = this.getMousePosition().getX();
             this.mouseY = this.getMousePosition().getY();
+        }
+
+        /**
+         * draws only the hitbox for
+         * @param g the graphics duh
+         */
+        @Deprecated
+        public void paintTest(Graphics g){
+            this.map.paintTest(g);
+            if(player.getMovingUp()){
+                player.moveUp(map.getCurrentLocation());
+            }
+            if(player.getMovingLeft()){
+                player.moveLeft(map.getCurrentLocation());
+            }
+            if(player.getMovingDown()){
+                player.moveDown(map.getCurrentLocation());
+            }
+            if(player.getMovingRight()){
+                player.moveRight(map.getCurrentLocation());
+            }
+            player.paintTest(g);
         }
 
         @Override
@@ -145,17 +177,27 @@ public class App extends JFrame {
     }
 
     public void run() {
+        int frames = 0;
+        long totalTime = 0;
+        long limiter = 1000;
         while (true) {
             Instant startTime = Instant.now();
             repaint();
+            frames++;
             Instant endTime = Instant.now();
             long howLong = Duration.between(startTime, endTime).toMillis();
             try {
-            Thread.sleep(17l - howLong);
+                Thread.sleep(limiter - howLong);
+                totalTime+=limiter - howLong;
+                if(totalTime >= 1000){
+                    System.out.println(frames);
+                    totalTime = 0;
+                    frames = 0;
+                }
             } catch(InterruptedException e) {
-            System.out.println("thread was interrupted, but who cares?");
+                System.out.println("thread was interrupted, but who cares?");
             } catch(IllegalArgumentException e) {
-            System.out.println("application can't keep up with framerate");
+                System.out.println("application can't keep up with framerate");
             }
         }
     }

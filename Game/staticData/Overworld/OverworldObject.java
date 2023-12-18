@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.io.File;
 import java.awt.Image;
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class OverworldObject {
@@ -40,6 +41,15 @@ public abstract class OverworldObject {
         g.drawImage(this.sprite, relativeX + x, relativeY + y, null);
     }
 
+    /**
+     * draws the hitboxes only 
+     */
+    @Deprecated
+    public void paintTest(Graphics g, int relativeX, int relativeY){
+        g.setColor(Color.RED);
+        g.drawRect(relativeX + x, relativeY + y, width, height);
+    }
+    
     public OverworldObject(int x, int y, int width, int height, String spritePath) {
         this.x = x;
         this.y = y;

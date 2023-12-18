@@ -36,6 +36,14 @@ public class WorldMap {
         g.fillRect(0, 0, 1280, 720);
         getCurrentLocation().paint(g);
     }
+    
+    /**
+     * draws only the hitbox
+     */
+    @Deprecated
+    public void paintTest(Graphics g){
+        getCurrentLocation().paintTest(g);
+    }   
 
     public WorldMap(){
         this.locations = new ArrayList<Location>(); 
@@ -66,7 +74,7 @@ public class WorldMap {
             }
             reader.close();
 
-            this.setCurrentLocation(locations.get(0));
+            this.setCurrentLocation(locations.get(1));
             System.out.println(this.getCurrentLocation().getX());
             System.out.println(locations.size());
         }
